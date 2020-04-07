@@ -1,6 +1,6 @@
 class Todo
 {
-    public static void main() {
+    public static void main(String[] arg) {
         System.out.println("Hello World!");
     }
 }

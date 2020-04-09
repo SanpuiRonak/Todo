@@ -22,7 +22,7 @@ public class Task {
     }
 
     boolean getStatus() {
-        return status;
+        command= status;
     }
 
 }

@@ -1,12 +1,16 @@
 import java.util.*;
 
 class Todo {
+
+    // static String command=;
+    // static String file;
     public static void main(String[] arg) {
         Map<Integer, Task> m = new HashMap<>();
+        String s = "Heloo";
         
-
+        
+        
     }
-
     String getCommand(String s)
     {
         if(s.equals("/list"))
@@ -31,5 +35,29 @@ class Todo {
         }
     }
 
+    String getFile(String s)
+    {
+        // if(s.equals("/list"))
+        // {
+        //     command= 
+        // }
+       // else 
+        if(s.substring(0,10).equals("/list add"))
+        {
+            return s.substring(10);
+        }
+        else if(s.substring(0,12).equals("/list delete"))
+        {
+            return s.substring(12);
+        }
+        else if(s.substring(0,13).equals("/list rename"))
+        {
+            return s.substring(13);
+        }
+        else
+        {
+            return "";
+        }
+    }
     
 }

@@ -1,9 +1,36 @@
+import java.util.*;
 
 public class App {
+    private static final String filename = null;
+
     public static void main(String[] arg) {
-        Map<Integer, Task> m = new HashMap<>();
+        Map<Integer, List> m = new HashMap<>();
         String input = "";
-        Tod
+        App ins = new App();
+        System.out.println("Enter");
+        Scanner sc = new Scanner(System.in);
+        while(!(input.equals("/exit")))
+        {
+            input=sc.nextLine();
+            final String command =ins.getCommand(input);
+            final String filname = ins.getFile(input);
+            switch(command)
+            {
+                case "/list":
+                {
+                    for(Integer key:m.keySet())
+                    {
+                        System.out.println(key);
+                    }
+                    break;
+                }
+                case "/list create":
+                {
+                    m.put(0, new List(filename));
+                    System.out.println("Added list "+filname);
+                }
+            }
+        }
         
         
         
@@ -14,9 +41,9 @@ public class App {
         {
             return s;
         }
-        else if(s.substring(0,10).equals("/list add"))
+        else if(s.substring(0,12).equals("/list create"))
         {
-            return "/list add";
+            return "/list create";
         }
         else if(s.substring(0,12).equals("/list delete"))
         {

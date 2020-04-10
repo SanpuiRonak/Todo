@@ -41,13 +41,24 @@ public class App {
                     list.delete(filename);
                 }
                 case "/list rename": {
-                    String on,nn, f;
+                    String on, nn, f;
                     f = ins.getFile(input);
-                    
+
                     int i = f.indexOf(' ');
-                    on=f.substring(0, i );
-                    nn =f.substring(i + 1);
-                    list.rename(on,nn);
+                    on = f.substring(0, i);
+                    nn = f.substring(i + 1);
+                    list.rename(on, nn);
+                }
+                case "/help": {
+                    System.out.println("Lyadh Lagche Bro!");
+                    break;
+                }
+                case "/exit":{
+                    break;
+                }
+
+                default: {
+                    System.out.println("Unknown command! use /help for more info");
                 }
 
             }
@@ -58,20 +69,42 @@ public class App {
     String getCommand(String s) {
         if (s.equals("/list")) {
             return s;
-        } else if (s.substring(0, 12).equals("/list create")) {
+        } else if (s.equals("/help")) {
+            return "/help";
+        }
+        else if(s.equals("/exit"))
+        {
+            return "/exit";
+        }
+        else if (s.substring(0, 12).equals("/list create"))
+        {
             return "/list create";
-        } else if (s.substring(0, 12).equals("/list delete")) {
+        } else if (s.substring(0, 12).equals("/list delete")) 
+        {
             return "/list delete";
-        } else if (s.substring(0, 12).equals("/list rename")) {
+        } 
+        else if (s.substring(0, 12).equals("/list rename")) 
+        {
             return "/list rename";
-        } else {
+        }
+
+        else
+         {
             return "";
         }
     }
 
     String getFile(String s) {
 
-        if (s.substring(0, 12).equals("/list create")) {
+        if(s.equals("/help"))
+        {
+            return "";
+        }
+        else if(s.equals("/exit"))
+        {
+            return "";
+        }
+        else if (s.substring(0, 12).equals("/list create")) {
             System.out.println(s.substring(12));
             return s.substring(13);
         } else if (s.substring(0, 12).equals("/list delete")) {

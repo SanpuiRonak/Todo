@@ -35,7 +35,7 @@ class List {
         File nf= new File(".\\List\\"+nn+".txt");
         if(of.renameTo(nf))
         {
-            System.out.println("List rename to "+nn+" Sucessfully!");
+            System.out.println("List renamed to "+nn+" Sucessfully!");
         }
         else
         {

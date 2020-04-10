@@ -6,14 +6,15 @@ public class App {
 
     public static void main(String[] arg) throws IOException {
         
+        
         String input = "";
         
         App ins = new App();
         
-        
         System.out.println("Enter");
         
         Scanner sc = new Scanner(System.in);
+        List task = new List();
         
         while (!(input.equals("/exit"))) {
         
@@ -23,19 +24,28 @@ public class App {
         
             System.out.println(input.substring(13));
         
-            final String filname = ins.getFile(input);
+            final String filename = ins.getFile(input);
+
+            List list = new List();
         
             switch (command) {
                 case "/list": {
-                    for (Integer key : m.keySet()) {
-                        System.out.println(key);
-                    }
+                    // for (Integer key : m.keySet()) {
+                    //     System.out.println(key);
+                    // }
                     break;
                 }
                 case "/list create": {
-                    m.put(0, new List(filename));
-
+                    list.create(filename);
+                    break;
                 }
+                case "/list delete":{
+                    list.delete(filename);
+                }
+                case "/list rename":{
+                    lis
+                }
+
             }
         }
 

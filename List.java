@@ -25,9 +25,21 @@ class List {
         }
         else
         {
-            System.out.println("Sorry no such file Exsists!");
+            System.out.println("Sorry no such list exsists!");
         }
     }
 
-    void 
+    void rename(String on,String nn) throws IOException
+    {
+        File of= new File(".\\List\\"+on+".txt");
+        File nf= new File(".\\List\\"+nn+".txt");
+        if(of.renameTo(nf))
+        {
+            System.out.println("List rename to "+nn+" Sucessfully!");
+        }
+        else
+        {
+            System.out.println("Sorry! no such list exsists");
+        }
+    }
 }

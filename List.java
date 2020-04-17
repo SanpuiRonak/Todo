@@ -1,7 +1,6 @@
-import java.util.*;
 import java.io.*;
 
-class List {
+class List implements Serializable{
 
     void create(String s) throws IOException
     {
@@ -41,5 +40,11 @@ class List {
         {
             System.out.println("Sorry! no such list exsists");
         }
+    }
+
+    void open(String file)
+    {
+        File f= new File(".\\List"+file+".txt");
+
     }
 }

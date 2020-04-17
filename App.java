@@ -49,6 +49,11 @@ public class App {
                     nn = f.substring(i + 1);
                     list.rename(on, nn);
                 }
+
+                case "/list open":{
+                    list.open(filename);
+                    
+                }
                 case "/help": {
                     System.out.println("Lyadh Lagche Bro!");
                     break;
@@ -86,6 +91,10 @@ public class App {
         else if (s.substring(0, 12).equals("/list rename")) 
         {
             return "/list rename";
+        }
+        else if(s.substring(0, 11).equals("/list open"))
+        {
+            return "/list open";
         }
 
         else

@@ -1,18 +1,30 @@
 import java.io.*;
+import java.util.ArrayList;
 
 class List implements Serializable{
 
-    void create(String s) throws IOException
+   // private Array task = new Array[10];
+    private int x;
+    
+    List(int x)
     {
-        File f = new File(".\\List\\"+s+".txt");
-        if(f.createNewFile())
-        {
-            System.out.println("Added list "+s);
-        }
-        else
-        {
-            System.out.println("List already Exsists!");
-        }
+        this.x=x;
+    }
+    void create(String f)throws IOException
+    {
+        
+        // File f = new File(".\\List\\"+s+".txt");
+        // if(f.createNewFile())
+        // {
+        //     System.out.println("Added list "+s);
+        // }
+        // else
+        // {
+        //     System.out.println("List already Exsists!");
+        // }
+        
+        ObjectOutputStream  oos= new ObjectOutputStream(new FileOutputStream("D:\\To-do\\List\\f.txt"));
+        
     }
 
     void delete(String s) throws IOException

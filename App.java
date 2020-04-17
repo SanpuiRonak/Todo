@@ -1,64 +1,65 @@
-import java.io.IOException;
+import java.io.*;
 
 import java.util.*;
 
-public class App {
+public class App implements Serializable {
     private static final String filename = null;
+    HashSet<List> list = new HashSet<>();
 
     public static void main(String[] arg) throws IOException {
 
         String input = "";
 
-        App ins = new App();
+        App app = new App();
 
         System.out.println("Enter");
 
         Scanner sc = new Scanner(System.in);
-        List task = new List();
 
         while (!(input.equals("/exit"))) {
 
             input = sc.nextLine();
 
-            final String command = ins.getCommand(input);
+            final String command = app.getCommand(input);
 
-            final String filename = ins.getFile(input);
+            final String filename = app.getFile(input);
 
-            List list = new List();
+            // List list = new List();
 
             switch (command) {
                 case "/list": {
-                    // for (Integer key : m.keySet()) {
-                    // System.out.println(key);
-                    // }
+                   // for(String s:list)
+                    //System.out.println(list);
                     break;
                 }
                 case "/list create": {
-                    list.create(filename);
+                    app.createList(filename);
                     break;
                 }
                 case "/list delete": {
-                    list.delete(filename);
+                    app.deleteList(filename);
+                    break;
                 }
                 case "/list rename": {
                     String on, nn, f;
-                    f = ins.getFile(input);
+                    f = app.getFile(input);
 
                     int i = f.indexOf(' ');
                     on = f.substring(0, i);
                     nn = f.substring(i + 1);
-                    list.rename(on, nn);
+                    app.renameList(on, nn);
+                    break;
                 }
 
-                case "/list open":{
-                    list.open(filename);
-                    
+                case "/list open": {
+                   // list.open(filename);
+
                 }
                 case "/help": {
                     System.out.println("Lyadh Lagche Bro!");
                     break;
                 }
-                case "/exit":{
+                case "/exit": {
                     break;
                 }
 
@@ -68,60 +69,109 @@ public class App {
 
             }
         }
-
+        sc.close();
     }
 
     String getCommand(String s) {
+        
         if (s.equals("/list")) {
             return s;
-        } else if (s.equals("/help")) {
+        }
+        
+        else if (s.equals("/help")) {
             return "/help";
-        }
-        else if(s.equals("/exit"))
-        {
+        } 
+        
+        else if (s.equals("/exit")) {
             return "/exit";
-        }
-        else if (s.substring(0, 12).equals("/list create"))
-        {
+        } 
+        
+        else if (s.substring(0, 12).equals("/list create")) {
             return "/list create";
-        } else if (s.substring(0, 12).equals("/list delete")) 
-        {
+        } 
+        
+        else if (s.substring(0, 12).equals("/list delete")) {
             return "/list delete";
         } 
-        else if (s.substring(0, 12).equals("/list rename")) 
-        {
+        
+        else if (s.substring(0, 12).equals("/list rename")) {
             return "/list rename";
-        }
-        else if(s.substring(0, 11).equals("/list open"))
-        {
+        } 
+        
+        else if (s.substring(0, 11).equals("/list open")) {
             return "/list open";
         }
 
-        else
-         {
+        else {
             return "";
         }
     }
 
     String getFile(String s) {
 
-        if(s.equals("/help"))
-        {
+        if (s.equals("/help")) {
             return "";
-        }
-        else if(s.equals("/exit"))
-        {
+        } 
+        
+        else if (s.equals("/exit")) {
             return "";
-        }
+        } 
+        
         else if (s.substring(0, 12).equals("/list create")) {
             System.out.println(s.substring(12));
             return s.substring(13);
-        } else if (s.substring(0, 12).equals("/list delete")) {
+        } 
+        
+        else if (s.substring(0, 12).equals("/list delete")) {
             return s.substring(13);
-        } else if (s.substring(0, 12).equals("/list rename")) {
+        } 
+        
+        else if (s.substring(0, 12).equals("/list rename")) {
             return s.substring(13);
-        } else {
+        } 
+        
+        else {
             return "";
+        }
+    }
+
+    void createList(String f) throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(".\\List\\"+f+".lst"));
+        List l = new List(10);
+        if (list.add(l)) {
+            oos.writeObject(l);
+        }
+
+        else {
+            System.out.println("Sorry list already exsists!");
+        }
+
+        oos.close();
+    }
+
+    void deleteList(String s) throws IOException
+    {
+        File f = new File(".\\List\\"+s+".lst");
+        if(f.delete())
+        {
+            System.out.println(s+" deleted Succesfuly");
+        }
+        else
+        {
+            System.out.println("Sorry! no such list exsists");
+        }
+    }
+    void renameList(String on,String nn) throws IOException
+    {
+        File of= new File(".\\List\\"+on+".lst");
+        File nf= new File(".\\List\\"+nn+".lst");
+        if(of.renameTo(nf))
+        {
+            System.out.println("List renamed to "+nn+" Sucessfully!");
+        }
+        else
+        {
+            System.out.println("Sorry! no such list exsists");
         }
     }
 

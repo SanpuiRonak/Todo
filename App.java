@@ -2,6 +2,8 @@ import java.io.*;
 
 import java.util.*;
 
+
+
 public class App implements Serializable {
     private static final String filename = null;
     HashSet<List> list = new HashSet<>();
@@ -41,6 +43,7 @@ public class App implements Serializable {
                     break;
                 }
                 case "/list rename": {
+                    try{
                     String on, nn, f;
                     f = app.getFile(input);
 
@@ -48,6 +51,11 @@ public class App implements Serializable {
                     on = f.substring(0, i);
                     nn = f.substring(i + 1);
                     app.renameList(on, nn);
+                    }
+                    catch(StringIndexOutOfBoundsException e)
+                    {
+                        System.out.println("Sorry wrong usage!");
+                    }
                     break;
                 }
 
@@ -136,7 +144,7 @@ public class App implements Serializable {
     }
 
     void createList(String f) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(".\\List\\"+f+".lst"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./List/"+f+".lst"));
         List l = new List(10);
         if (list.add(l)) {
             oos.writeObject(l);
@@ -151,7 +159,7 @@ public class App implements Serializable {
 
     void deleteList(String s) throws IOException
     {
-        File f = new File(".\\List\\"+s+".lst");
+        File f = new File("./List/"+s+".lst");
         if(f.delete())
         {
             System.out.println(s+" deleted Succesfuly");
@@ -163,8 +171,8 @@ public class App implements Serializable {
     }
     void renameList(String on,String nn) throws IOException
     {
-        File of= new File(".\\List\\"+on+".lst");
-        File nf= new File(".\\List\\"+nn+".lst");
+        File of= new File("./List/"+on+".lst");
+        File nf= new File("./List/"+nn+".lst");
         if(of.renameTo(nf))
         {
             System.out.println("List renamed to "+nn+" Sucessfully!");

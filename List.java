@@ -1,20 +1,17 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class List implements Serializable{
 
-   // private Array task = new Array[10];
-    private int x;
-    
-    List(int x)
+    ArrayList <Task> tasks=new ArrayList<>();
+    void addTask(String f)throws IOException
     {
-        this.x=x;
-    }
-    void createTask(String f)throws IOException
-    {
+        int i=tasks.size()-1;
         
-       
-        
+       tasks.add(new Task(f,i));
+       this.printList();
+           
     }
 
     void delete(String s) throws IOException
@@ -48,5 +45,20 @@ class List implements Serializable{
     {
         File f= new File(".\\List"+file+".txt");
 
+    }
+     List(String file)throws IOException, ClassNotFoundException
+    {
+        File f=new File("./List"+file+".lst");
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+        List tmp=(List)(ois.readObject());
+        tmp.printList();   
+    }
+
+    void printList()
+    {
+        for(int i=0;i<this.tasks.size();i++)
+        {
+            tasks.get(i).printTask();
+        }
     }
 }

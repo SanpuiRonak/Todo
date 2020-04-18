@@ -8,7 +8,8 @@ public class App implements Serializable {
     private static final String filename = null;
     HashSet<List> list = new HashSet<>();
 
-    public static void main(String[] arg) throws IOException {
+    static List l;
+    public static void main(String[] arg) throws IOException, ClassNotFoundException {
 
         String input = "";
 
@@ -17,6 +18,8 @@ public class App implements Serializable {
         System.out.println("Enter");
 
         Scanner sc = new Scanner(System.in);
+
+        
 
         while (!(input.equals("/exit"))) {
 
@@ -60,8 +63,8 @@ public class App implements Serializable {
                 }
 
                 case "/list open": {
-                   // list.open(filename);
-
+                   app.openList(filename);
+                    break;
                 }
                 case "/help": {
                     System.out.println("Lyadh Lagche Bro!");
@@ -69,6 +72,10 @@ public class App implements Serializable {
                 }
                 case "/exit": {
                     break;
+                }
+
+                case "/task add":{
+                    l.addTask(filename);
                 }
 
                 default: {
@@ -110,6 +117,10 @@ public class App implements Serializable {
             return "/list open";
         }
 
+        else if(s.substring(0, 10).equals("/task add"))
+        {
+            return "/task add";
+        }
         else {
             return "";
         }
@@ -136,25 +147,44 @@ public class App implements Serializable {
         
         else if (s.substring(0, 12).equals("/list rename")) {
             return s.substring(13);
-        } 
+        }
+        
+        else if(s.substring(0, 11).equals("/list open"))
+        {
+            return s.substring(12);
+        }
+
+        else if(s.substring(0, 10).equals("/task add"))
+        {
+            return s.substring(11);
+        }
         
         else {
             return "";
         }
     }
 
-    void createList(String f) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./List/"+f+".lst"));
-        List l = new List(10);
-        if (list.add(l)) {
-            oos.writeObject(l);
-        }
+    void createList(String file) throws IOException {
+        // ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./List/"+f+".lst"));
+        // List l =new List();
+        // if (list.add(l)) {
+        //     oos.writeObject(l);
+        // }
 
-        else {
-            System.out.println("Sorry list already exsists!");
-        }
+        // else {
+        //     System.out.println("Sorry list already exsists!");
+        // }
 
-        oos.close();
+        // oos.close();
+        File f= new File("./List/"+file+".lst");
+        if(f.createNewFile())
+        {
+            System.out.println("Added List "+f+" Successful!");
+        }
+        else
+        {
+            System.out.println("Sorry! list already exsist");
+        }
     }
 
     void deleteList(String s) throws IOException
@@ -181,6 +211,14 @@ public class App implements Serializable {
         {
             System.out.println("Sorry! no such list exsists");
         }
+    }
+
+    void openList(String f) throws ClassNotFoundException, IOException 
+    {
+        
+        List t=new List(f);
+         l=t;
+
     }
 
 }
